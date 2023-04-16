@@ -1,5 +1,5 @@
 body {
-  background-image: url(/27169.jpg);
+  background-image: url('/27169.jpg');
   background-size: 20%;
   background-position: center;
 }
@@ -27,7 +27,7 @@ header {
   text-align: center;
   border-radius: 15px;
   margin: 5px auto;
-  height:auto;
+  height: auto;
   align-items: center;
   justify-content: center;
   width: 25em;
@@ -59,6 +59,7 @@ header {
 .button {
   background-color: #ebebeb;
   border-radius: 15px;
-  width: 80px;
-  font-size: 1.1em;
+  width: 100px;
+  font-size: 1em;
+  margin: 5px;
 }
