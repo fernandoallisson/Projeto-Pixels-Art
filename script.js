@@ -16,7 +16,7 @@ for (const div of divCor) {
 }
 // As cores foram geradas automaticamente, então eu vou atribuir ao botão sortear, as cores em formato aleatório. E adicionando à primeira div a cor preta.
 
-const sortear = document.querySelector('#rand');
+const sortear = document.querySelector('#button-random-color');
 
 sortear.addEventListener('click', () => {
   divCor.forEach(div => {
@@ -32,23 +32,3 @@ sortear.addEventListener('click', () => {
 });
 
 
-
-
-
-
-
-
-
-
-
-// divCor.forEach(div => {
-//   div.addEventListener('click', () => {
-//     let corGerada = GerarCorAleatória()
-//     if (corGerada !== corBranca) {
-//       div.style.backgroundColor = corGerada;
-//     } else {
-//       corGerada = GerarCorAleatória();
-//       div.style.backgroundColor = corGerada;
-//     }
-//   }) 
-// });
