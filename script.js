@@ -62,8 +62,9 @@ window.addEventListener('load', () => {
 
   criacaoDeTabelaDePixels()
 
-  const limpar = document.querySelector()
-
+  
+  const limpar = document.querySelector('clear-board')
+  const pixel = document.querySelectorAll('.pixel')
 
 
 });
