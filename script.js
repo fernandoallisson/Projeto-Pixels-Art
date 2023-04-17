@@ -6,6 +6,8 @@ window.addEventListener('load', () => {
   const sortear = document.querySelector('#button-random-color'); // Pega o elemento 'botão' de Sortear lá no HTML;
   // const quadroDePixels = document.querySelector('#pixel-board'); // Pegar no DOM o elemento com a classe indicada no '()'.
   let quantidadeDePixels = 25;
+  let salvarQuadro = [];
+  const limpar = document.querySelector('#clear-board')
 
   
 
@@ -58,13 +60,15 @@ window.addEventListener('load', () => {
       quadroDePixels.appendChild(pixel);
 
     }
-  }
-
+  };
   criacaoDeTabelaDePixels()
 
-  
-  const limpar = document.querySelector('clear-board')
-  const pixel = document.querySelectorAll('.pixel')
-
-
+  // Essa função faz com que limpe tudo do quadro e deixe-o branco
+  limpar.addEventListener('click', () => {
+    const pixels = document.querySelectorAll('.pixel')
+    for(let i = 0; i < pixels.length; i += 1) {
+      pixels[i].style.backgroundColor = 'white'
+      salvarQuadro.push('white')
+    }
+  })
 });
