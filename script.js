@@ -7,9 +7,8 @@ window.addEventListener('load', () => {
   // const quadroDePixels = document.querySelector('#pixel-board'); // Pegar no DOM o elemento com a classe indicada no '()'.
   let quantidadeDePixels = 25;
   let salvarQuadro = [];
-  const limpar = document.querySelector('#clear-board')
-
-  
+  const limpar = document.querySelector('#clear-board');
+  let corSelecionada = 'black';
 
   // functions ---------------------------------------------------------
   // Aqui vou criar uma função para gerar cores aleatórias e posteriormente usar em uma das funções criadas. 
@@ -71,5 +70,37 @@ window.addEventListener('load', () => {
       salvarQuadro.push('white')
     }
   })
-});
 
+  // Adicionei um escutador de evento para cada vez que eu tocar nas cores ele selecionar a cor em formato RGB. Também adicionar um zoom à cor; e guardar a cor dentro de uma variável.
+  for (let index of divCor) {
+    divCor[0].classList.add('selected')
+    index.addEventListener('click', () => {
+      for (let index of divCor){
+        index.classList.remove('selected')
+        index.style.width = '50px'
+        index.style.height = '50px'
+        corSelecionada = 'black'
+      }
+      index.classList.add('selected')
+      index.style.width = '55px'
+      index.style.height = '55px'
+      corSelecionada = index.style.backgroundColor
+    })
+  }
+
+  // Aqui vou pegar a cor selecionada e adicionar ao pixel que eu clicar.
+  const divsBrancas = document.querySelectorAll('.pixel'); // Pegar no DOM o elemento com classe 'pixel' que são os próprios pixels.
+
+  for (let index of divsBrancas) {
+    index.addEventListener('click', () => {
+      index.style.backgroundColor = corSelecionada
+    })
+  }
+
+
+
+
+
+
+
+});
