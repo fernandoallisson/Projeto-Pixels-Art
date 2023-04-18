@@ -6,9 +6,9 @@ window.addEventListener('load', () => {
   const sortear = document.querySelector('#button-random-color'); // Pega o elemento 'botão' de Sortear lá no HTML;
   // const quadroDePixels = document.querySelector('#pixel-board'); // Pegar no DOM o elemento com a classe indicada no '()'.
   let quantidadeDePixels = 25;
-  let salvarQuadro = [];
   const limpar = document.querySelector('#clear-board');
   let corSelecionada = 'black';
+  let salvarQuadro = []; // Aqui vai salvar todos as cores de cada PIXEL
 
   // functions ---------------------------------------------------------
   // Aqui vou criar uma função para gerar cores aleatórias e posteriormente usar em uma das funções criadas. 
@@ -19,12 +19,10 @@ window.addEventListener('load', () => {
     return (`rgb(${red}, ${green}, ${blue})`)
   }
 
-
-
   // Aqui eu quero criar um loop para adicionar as cores dos elementos que eu salvei no localStorage e aplicar a cada um dos itens caso haja alguma cor salva. 
   if(coresSalvas) {
     for(let i = 0; i <coresSalvas.length; i += 1) {
-      divCor[i].style.backgroundColor = coresSalvas[i]
+      divCor[i].style.backgroundColor = coresSalvas[i];
     }
   } else {
     // Com as cores geradas. Agora vou pegar as divs das cores que têm a classe '.color' para adicionar a cada uma, uma das cores assim que recarregar a página, menos a cor branca. E o primeiro elemento com a cor Preta.
@@ -57,18 +55,17 @@ window.addEventListener('load', () => {
       pixel.classList.add('pixel');
       pixel.style.backgroundColor = 'white'
       quadroDePixels.appendChild(pixel);
-
     }
   };
   criacaoDeTabelaDePixels()
 
   // Essa função faz com que limpe tudo do quadro e deixe-o branco
   limpar.addEventListener('click', () => {
-    const pixels = document.querySelectorAll('.pixel')
-    for(let i = 0; i < pixels.length; i += 1) {
-      pixels[i].style.backgroundColor = 'white'
-      salvarQuadro.push('white')
-    }
+    divsBrancas.forEach((pixel, index) => {
+        pixel.style.backgroundColor = 'white';
+        salvarQuadro[index] = 'white';
+        localStorage.setItem('pixelBoard', JSON.stringify(salvarQuadro));
+    })
   })
 
   // Adicionei um escutador de evento para cada vez que eu tocar nas cores ele selecionar a cor em formato RGB. Também adicionar um zoom à cor; e guardar a cor dentro de uma variável.
@@ -86,15 +83,28 @@ window.addEventListener('load', () => {
       index.style.height = '55px'
       corSelecionada = index.style.backgroundColor
     })
-  }
+  };
 
-  // Aqui vou pegar a cor selecionada e adicionar ao pixel que eu clicar.
+  // Aqui vou pegar a cor selecionada e adicionar ao pixel que eu clicar e salvar as cores dentro do LocalStorage;
+
   const divsBrancas = document.querySelectorAll('.pixel'); // Pegar no DOM o elemento com classe 'pixel' que são os próprios pixels.
 
-  for (let index of divsBrancas) {
-    index.addEventListener('click', () => {
-      index.style.backgroundColor = corSelecionada
+  divsBrancas.forEach((pixel, index) => {
+    pixel.addEventListener('click', () => {
+      pixel.style.backgroundColor = corSelecionada;
+      salvarQuadro[index] = corSelecionada;
+      localStorage.setItem('pixelBoard', JSON.stringify(salvarQuadro));
     })
+  })
+  
+  // Aqui vou recuperar as cores dos pixels; 
+  const paletaSalva = JSON.parse(localStorage.getItem('pixelBoard'));
+  salvarQuadro = paletaSalva ? paletaSalva : new Array(divsBrancas.length).fill(null);
+
+  if (paletaSalva) {
+    paletaSalva.forEach((cor, index) => {
+      divsBrancas[index].style.backgroundColor = cor || 'white';
+    });
   }
 
 
@@ -103,4 +113,50 @@ window.addEventListener('load', () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // const divsBrancas = document.querySelectorAll('.pixel'); // Pegar no DOM o elemento com classe 'pixel' que são os próprios pixels.
+
+  // divsBrancas.forEach((pixel, index) => {
+  //   pixel.addEventListener('click', () =>{
+  //     pixel.style.backgroundColor = corSelecionada;
+  //     salvarQuadro[index] = corSelecionada;
+  //     localStorage.setItem('pixelBoard', JSON.stringify(salvarQuadro));
+  //   })
+  // })
+
+  // // Aqui vou recuperar as cores dos pixels; 
+  // const paletaSalva = JSON.parse(localStorage.getItem('pixelBoard'));
+  // if (salvarQuadro){
+  //   divsBrancas.forEach((pixel, index) => {
+  //     pixel.style.backgroundColor = paletaSalva[index];
+  //   });
+  // }
+
+
+  // if (paletaSalva) {
+  //   paletaSalva.forEach((cor, index) => {
+  //     divsBrancas[index].style.backgroundColor = cor ? cor : 'white';
+  //   });
+  // }
 });
+
+
+
+
+
