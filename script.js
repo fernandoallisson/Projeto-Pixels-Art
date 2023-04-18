@@ -99,6 +99,8 @@ window.addEventListener('load', () => {
   
   // Aqui vou recuperar as cores dos pixels; 
   const paletaSalva = JSON.parse(localStorage.getItem('pixelBoard'));
+  
+  // Essa linha abaixo é para recuperar o quadro que estava selecionado antes.
   salvarQuadro = paletaSalva ? paletaSalva : new Array(divsBrancas.length).fill(null);
 
   if (paletaSalva) {
